@@ -3,7 +3,8 @@
 myResourceGroup="some-rg"
 myAKSCluster="some-aks"
 
-SP_ID=$(az aks show --resource-group $myResourceGroup --name $myAKSCluster
+SP_ID=$(az aks show --resource-group $myResourceGroup --name $myAKSCluster \
+    --query servicePrincipalProfile.clientId -o tsv)
 
 SP_SECRET=$(az ad sp credential reset --name $SP_ID --query password -o tsv)
 
